@@ -1,3 +1,5 @@
+## Command line git
+
 * status
     * shows: files not being tracked, files with changes that need to be committed, files out of sync with the remote repo
     * `git status`
@@ -50,3 +52,29 @@
 * checkout 
     * use to switch branches
     * `git checkout 'branchname'`
+
+## git files & folders
+
+* .git folder
+    * contains all information relevant to the project:
+        * HEAD
+        * config
+        * description
+        * hooks
+        * index
+        * info
+        * logs
+        * objects
+        * packed-refs
+        * refs
+
+* .gitignore
+    * put files in here if you want git to ignore them and never upload them to your remote repo
+
+## GitHub
+
+* Pull requests
+    * make a pull request and the owner of a remote repo will review your code and decide if they want to merge it into main
+
+* SSH authentication to repositories
+    * (Secure Shell), a means to remotely connect to github repositories safely and securely.
