@@ -19,3 +19,7 @@ by typing "Gus, don't be" the bot will complete the quote with one of many exmpl
 ![alt text](https://github.com/WSU-kduncan/ceg3120-C1WP/blob/main/Discord-Bot/quotes.png "quotes")
 
 ## Research
+
+If you wanted to make it possible for your bot to run without having to start it from your computer, you will need to host it on a server. I watched [this](https://www.youtube.com/watch?v=BPvg9bndP1U) tutorial on how to use a site called [heroku](heroku.com)
+
+Heroku is a free PaaS cloud service that can host your bot and keep it running even when your computer is shut down
