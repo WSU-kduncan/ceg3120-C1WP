@@ -16,6 +16,6 @@ This bot completes quotes from Psych. Shawn has told Gus not to be many things
 
 by typing "Gus, don't be" the bot will complete the quote with one of many exmples.
 
-Screenshots
+![alt text](https://github.com/WSU-kduncan/ceg3120-C1WP/blob/main/Discord-Bot/quotes.png "quotes")
 
 ## Research
