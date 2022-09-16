@@ -48,15 +48,14 @@ async def on_message(message):
         'exactly half of an eleven-pound black forest ham.',
         'a rabid porcupine.',
     ]
-
-    if message.content == 'Gus dont be':
-    #if message.content.startswith('$towel'):
-        response = random.choice(psych_quotes)
-        await message.channel.send(response)
-
     if message.content == 'towel!':
     #if message.content.startswith('$towel'):
         response = random.choice(hitchhiker_quotes)
+        await message.channel.send(response)
+    
+    elif message.content == 'Gus dont be':
+    #if message.content.startswith('$Gus dont be'):
+        response = random.choice(psych_quotes)
         await message.channel.send(response)
 
 client.run(TOKEN)
