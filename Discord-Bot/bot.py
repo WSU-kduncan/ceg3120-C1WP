@@ -40,20 +40,20 @@ async def on_message(message):
     ]
 
     psych_quotes = [
-        'Gus, dont be the tender sweetness of a seasick crocodile.',
-        'Gus, dont be the very model of a modern major general.',
-        'Gus, dont be your jury summons that I accidentally threw away last month along with something called a W-2.',
-        'Gus, dont be Nic Cages accent from Con Air.',
-        'Gus, dont be an old sponge with hair hanging off of it.',
-        'Gus, dont be exactly half of an eleven-pound black forest ham.',
-        'Gus, dont be a rabid porcupine.',
+        'the tender sweetness of a seasick crocodile.',
+        'the very model of a modern major general.',
+        'your jury summons that I accidentally threw away last month along with something called a W-2.',
+        'Nic Cage\'s accent from Con Air.',
+        'an old sponge with hair hanging off of it.',
+        'exactly half of an eleven-pound black forest ham.',
+        'a rabid porcupine.',
     ]
     if message.content == 'towel!':
     #if message.content.startswith('$towel'):
         response = random.choice(hitchhiker_quotes)
         await message.channel.send(response)
     
-    if message.content == 'gdb!':
+    if message.content == 'Gus, don\'t be':
     #if message.content.startswith('$gdb!'):
         response = random.choice(psych_quotes)
         await message.channel.send(response)
