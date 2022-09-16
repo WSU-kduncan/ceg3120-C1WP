@@ -38,6 +38,22 @@ async def on_message(message):
         'In the beginning the Universe was created. This has made a lot of people very angry and been widely regarded as a bad move.',
         'A common mistake that people make when trying to design something completely foolproof is to underestimate the ingenuity of complete fools.',
     ]
+
+    psych_quotes = [
+        'the tender sweetness of a seasick crocodile.',
+        'the very model of a modern major general.',
+        'your jury summons that I accidentally threw away last month along with something called a W-2.',
+        'Nic Cage\'s accent from Con Air.',
+        'an old sponge with hair hanging off of it.',
+        'exactly half of an eleven-pound black forest ham.',
+        'a rabid porcupine.',
+    ]
+
+    if message.content == 'Gus dont be':
+    #if message.content.startswith('$towel'):
+        response = random.choice(psych_quotes)
+        await message.channel.send(response)
+
     if message.content == 'towel!':
     #if message.content.startswith('$towel'):
         response = random.choice(hitchhiker_quotes)
