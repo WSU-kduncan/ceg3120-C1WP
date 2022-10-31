@@ -1,6 +1,8 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-   Creates 3 instances and 1 VPC.  Each instance gets a private IP and is pre-installed with required software.  The proxy server gets a public IP as does a NAT gateway.  The backend servers use the NAT gateway for world communications, but they do not have individual public IPs.
+   Creates 3 instances and 1 VPC.  Each instance gets a private IP and is pre-installed with required software.  
+   The proxy server gets a public IP as does a NAT gateway.  The backend servers use the NAT gateway for world communications, 
+   but they do not have individual public IPs.
 Parameters:
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
@@ -140,8 +142,15 @@ Resources:
         - IpProtocol: tcp
           FromPort: '22'
           ToPort: '22'
-          CidrIp: 0.0.0.0/32  # TODO Replace with home / trusted public IP
-          # TODO Need more rules for port 80 access
+          CidrIp: 184.57.171.219/32 # Home
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 10.0.0.0/16 # VPC as a whole.
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0 # anywhere
       Tags: 
         - Key: Name
           Value: P4-sg
@@ -175,11 +184,14 @@ Resources:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
-            apt-get update && \
-            # TODO need to install haproxy
-            apt-get install -y git python3 python3-pip && \
-            hostnamectl set-hostname proxy && \
-            reboot
+            sudo apt-get update && \
+            sudo apt-get install -y git && \
+            sudo apt install python3 && \
+            sudo apt install python3-pip -y && \
+            sudo apt install -y haproxy && \
+            sudo apt update && sudo apt upgrade -y && \
+            sudo hostnamectl set-hostname proxy && \
+            sudo reboot
   WebServ1Instance:
     Type: 'AWS::EC2::Instance'
     DependsOn: NATGateway
@@ -205,14 +217,52 @@ Resources:
           DeviceIndex: '0'
           DeleteOnTermination: 'true'
           SubnetId: !Ref PrivateSubnet
-          PrivateIpAddress: 10.0.1.10 # TODO make sure unique to the instance
+          PrivateIpAddress: 10.0.1.11 # TODO make sure unique to the instance
       UserData:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
-            apt-get update && \
-            # TODO need to install apache or nginx
-            apt-get install -y git && \
-            # TODO give it a hostname - hostnamectl  && \
-            reboot
-# TODO: create another webserver instance attached to the private subnet
+            sudo apt-get update && \
+            sudo apt-get install -y git && \
+            sudo apt install python3 && \
+            sudo apt install python3-pip -y && \
+            sudo apt install -y apache2 && \
+            sudo hostnamectl set-hostname webserv1 && \
+            sudo reboot
+  WebServ2Instance:
+    Type: 'AWS::EC2::Instance'
+    DependsOn: NATGateway
+    Properties:
+      ImageId: !FindInMap 
+        - AWSRegionUbuntu
+        - !Ref 'AWS::Region'
+        - !FindInMap 
+          - AWSInstanceType2Arch
+          - t2.micro
+          - Arch
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      Tags:
+        - Key: Application
+          Value: !Ref 'AWS::StackId'
+        - Key: Name
+          Value: webserv2
+      NetworkInterfaces:
+        - GroupSet:
+            - !Ref SecurityGroup
+          AssociatePublicIpAddress: 'false'
+          DeviceIndex: '0'
+          DeleteOnTermination: 'true'
+          SubnetId: !Ref PrivateSubnet
+          PrivateIpAddress: 10.0.1.12 # TODO make sure unique to the instance
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            sudo apt-get update && \
+            sudo apt-get install -y git && \
+            sudo apt install python3 && \
+            sudo apt install python3-pip -y && \
+            sudo apt install -y apache2 && \
+            sudo hostnamectl set-hostname webserv2 && \
+            sudo reboot
