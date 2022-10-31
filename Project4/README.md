@@ -36,3 +36,10 @@ Reference: https://ubuntu.com/tutorials/install-and-configure-apache#1-overview
     add servername
 * activate config file `sudo a2ensite html.conf`
 * `sudo systemctl reload apache2`
+
+## Final Step
+
+* go to your browser and type your proxy's elastic IP in
+* refresh the page to see HAproxy switch between the two backend servers
+![browser connected to webserv1 successfully](./screenshots/browserconn1.png) 
+![browser connected to webserv2 successfully](./screenshots/browserconn2.png) 
