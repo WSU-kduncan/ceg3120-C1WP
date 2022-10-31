@@ -34,5 +34,5 @@ Reference: https://ubuntu.com/tutorials/install-and-configure-apache#1-overview
 * edit your new config file
     edit documentroot
     add servername
-* activate config file `sudo a2ensite proj4-1.conf`
+* activate config file `sudo a2ensite html.conf`
 * `sudo systemctl reload apache2`
