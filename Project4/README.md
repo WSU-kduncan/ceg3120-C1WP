@@ -12,15 +12,15 @@ Reference: https://linuxhostsupport.com/blog/how-to-install-and-configure-haprox
 
 * copy the default config file with `sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}`
 * I added these settings to my new config file
-    `frontend haproxy-main`
-    `bind *:80`
-    `option forwardfor`
-    `default_backend apache_webservers`    
+    * `frontend haproxy-main`
+    * `bind *:80`
+    * `option forwardfor`
+    * `default_backend apache_webservers`    
 
-    `backend apache_webservers`
-    `balance roundrobin`
-    `server webserv1	10.0.1.11:80 check`
-    `server webserv2	10.0.1.12:80 check`
+    * `backend apache_webservers`
+    * `balance roundrobin`
+    * `server webserv1	10.0.1.11:80 check`
+    * `server webserv2	10.0.1.12:80 check`
 
 * Restart the system `sudo systemctl restart haproxy`
 
