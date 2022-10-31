@@ -31,14 +31,14 @@ Reference: https://ubuntu.com/tutorials/install-and-configure-apache#1-overview
 * cd into `/var/www/html` and replace the index file with your content
 * cd into `/etc/apache2/sites-available/`
 * create a config file by copying the defaults `sudo cp 000-default.conf html.conf`
-* edit your new config file
-    edit documentroot
-    add servername
+* edit your new config file, some good settings are
+    * `ServerAdmin {Email}`
+    * `DocumentRoot /var/www/html`
+    * `ServerName {Name}`
 * activate config file `sudo a2ensite html.conf`
 * `sudo systemctl reload apache2`
 
 ## Final Step
-
 * go to your browser and type your proxy's elastic IP in
 * refresh the page to see HAproxy switch between the two backend servers
 ![browser connected to webserv1 successfully](./screenshots/browserconn1.png) 
